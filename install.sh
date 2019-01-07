@@ -336,20 +336,23 @@ rm -f /etc/cron.hourly/fake-hwclock
 rm -f /etc/init.d/fake-hwclock
 update-rc.d fake-hwclock remove
 
-
 # enable hwclock (systemd)
-rm -f /lib/systemd/system/hwclock.service
-wget -nv $REPORAW/src/hwclock.service -O /lib/systemd/system/hwclock.service
-systemctl unmask hwclock
-systemctl reenable hwclock
+#rm -f /lib/systemd/system/hwclock.service
+#wget -nv $REPORAW/src/hwclock.service -O /lib/systemd/system/hwclock.service
+#systemctl unmask hwclock
+#systemctl reenable hwclock
 
 # init hwclock (init.d)
-if grep -q "mcp7940x 0x6f" "/etc/init.d/hwclock.sh"; then
-        echo ""
-else
-    sed -i 's/unset TZ/echo mcp7940x 0x6f > \/sys\/class\/i2c-adapter\/i2c-1\/new_device/g' /etc/init.d/hwclock.sh
-fi
-update-rc.d hwclock.sh enable
+#if grep -q "mcp7940x 0x6f" "/etc/init.d/hwclock.sh"; then
+#        echo ""
+#else
+#    sed -i 's/unset TZ/echo mcp7940x 0x6f > \/sys\/class\/i2c-adapter\/i2c-1\/new_device/g' /etc/init.d/hwclock.sh
+#fi
+update-rc.d hwclock.sh disable
+update-rc.d hwclock.sh remove
+
+# install modified hwclock-set (check for systemd removed)
+wget -nv $REPORAW/src/hwclock-set -O /lib/udev/hwclock-set
 
 
 echo -e "$INFO INFO: Disabling Bluetooth to use serial port $NC"
