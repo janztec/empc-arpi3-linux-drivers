@@ -67,7 +67,7 @@ dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
 dtoverlay=sc16is7xx-ttysc0-rs232-rs485
 
 # RTC
-dtoverlay=i2c-rtc,ds1307
+dtoverlay=i2c-rtc,mcp7940x
 
 [pi2]
 # green LED (gpio5) as SD card activity
