@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # emPC-A/RPI3+, emVIEW-7/RPI3+  by Janz Tec AG
 
 This script installs and configures Linux **Socket CAN**, **Serial port RS232/RS485** and **RTC** drivers
@@ -89,6 +88,4 @@ https://www.janztec.com/en/embedded-pc/panel-pc/emview-7rpi3/
    * Glass surface
 * Same I/O as emPC-A/RPI3
 =======
-# empc-arpi3-linux-drivers
-emPC-A/RPI3, emPC-A/RPI3+, emPC-A/RPI &amp; emVIEW-7/RPI3 by Janz Tec AG
->>>>>>> branch 'master' of https://github.com/janztec/empc-arpi3-linux-drivers
+
