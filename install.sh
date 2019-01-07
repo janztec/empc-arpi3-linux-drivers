@@ -236,7 +236,7 @@ fi
 # compile device tree files
 
 wget -nv $REPORAW/src/mcp2515-can0-overlay.dts -O mcp2515-can0-overlay.dts
-wget -nv $REPORAW/src/sc16is7xx-ttysc0-rs232-overlay.dts -O sc16is7xx-ttysc0-rs232-rs485-overlay.dts
+wget -nv $REPORAW/src/sc16is7xx-ttysc0-rs232-rs485-overlay.dts -O sc16is7xx-ttysc0-rs232-rs485-overlay.dts
 
 dtc -@ -H epapr -O dtb -W no-unit_address_vs_reg -o mcp2515-can0.dtbo -b 0 mcp2515-can0-overlay.dts
 dtc -@ -H epapr -O dtb -W no-unit_address_vs_reg -o sc16is7xx-ttysc0-rs232-rs485.dtbo -b 0 sc16is7xx-ttysc0-rs232-rs485-overlay.dts
