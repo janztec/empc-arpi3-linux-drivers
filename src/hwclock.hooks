@@ -20,4 +20,5 @@ manual_add_modules i2c_bcm2835
 manual_add_modules rtc_ds1307
 copy_exec /sbin/hwclock /sbin
 copy_exec /sbin/modprobe /sbin
+copy_exec /bin/date /bin
 

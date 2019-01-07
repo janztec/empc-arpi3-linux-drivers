@@ -282,7 +282,7 @@ fi
 WELCOME2="These configuration settings will automatically be made:\n
 - Install default config.txt
 - Install SocketCAN initialization as service
-- Install RTC initialization as service
+- Install RTC initialization in initramfs
 - Increase USB max. current
 - Enable I2C and SPI drivers
 - Set green LED as SD card activity LED\n"
@@ -356,18 +356,21 @@ fi
 
 
 
+# read RTC time in initramfs (early as possible)
 wget -nv $REPORAW/src/hwclock.hooks -O /etc/initramfs-tools/hooks/hwclock
 wget -nv $REPORAW/src/hwclock.init-bottom -O /etc/initramfs-tools/scripts/init-bottom/hwclock
 
 chmod +x /etc/initramfs-tools/hooks/hwclock
 chmod +x /etc/initramfs-tools/scripts/init-bottom/hwclock
 
+echo -e "$INFO INFO: generating initramfs $NC"
 mkinitramfs -o /boot/initramfs.gz
 
-if ! cat /boot/config.txt | grep "initramfs" > /dev/null; then
+if test -e /boot/initramfs.gz; then
 	echo -e "$INFO INFO: Installing initramfs $NC"
 	echo "initramfs initramfs.gz followkernel" >>/boot/config.txt
 fi
+
 
 
 wget -nv $REPORAW/scripts/empc-can-configbaudrate.sh -O /usr/sbin/empc-can-configbaudrate.sh
