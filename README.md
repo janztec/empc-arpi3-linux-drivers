@@ -1,4 +1,4 @@
-# emPC-A/RPI3+, emVIEW-7/RPI3+  by Janz Tec AG
+# emPC-A/RPI3, emPC-A/RPI3+, emVIEW-7/RPI3 & emVIEW-7/RPI3+ by Janz Tec AG 
 
 This script installs and configures Linux **Socket CAN**, **Serial port RS232/RS485** and **RTC** drivers
 
@@ -8,7 +8,7 @@ This script installs and configures Linux **Socket CAN**, **Serial port RS232/RS
 
 In newer Raspbian images the Linux kernel is installed in version 4.9 (or later) and therefore our previous script _install.sh_ will no longer work correctly. For this newer Linux kernel versions, our new driver installation script _install-experimental.sh_ is still under development. Your feedback is welcome!
 
-_create a backup copy of your ÂµSD card before applying these steps!_
+_create a backup copy of your µSD card before applying these steps!_
 
 **Step 1:**
 
@@ -87,5 +87,5 @@ https://www.janztec.com/en/embedded-pc/panel-pc/emview-7rpi3/
    * Projected capacitive touch screen (PCAP) (with multitouch capabilities)
    * Glass surface
 * Same I/O as emPC-A/RPI3
-=======
+
 
