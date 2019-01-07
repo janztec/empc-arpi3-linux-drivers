@@ -53,7 +53,8 @@ if [ $EUID -ne 0 ]; then
     exit 1
 fi
 
-if ! ping -c 1 www.github.com; then
+wget -q --spider https://www.github.com
+if [ $? -ne 0 ]; then
         echo -e "$ERR ERROR: Internet connection required! $NC" 1>&2
         exit 1
 fi
@@ -331,28 +332,13 @@ systemctl mask fake-hwclock
 
 # disable fake clock (init.d)
 service fake-hwclock stop
-apt-get -y remove fake-hwclock
+
 rm -f /etc/cron.hourly/fake-hwclock
-rm -f /etc/init.d/fake-hwclock
-update-rc.d fake-hwclock remove
+update-rc.d fake-hwclock disable
 
-# enable hwclock (systemd)
-#rm -f /lib/systemd/system/hwclock.service
-#wget -nv $REPORAW/src/hwclock.service -O /lib/systemd/system/hwclock.service
-#systemctl unmask hwclock
-#systemctl reenable hwclock
-
-# init hwclock (init.d)
-#if grep -q "mcp7940x 0x6f" "/etc/init.d/hwclock.sh"; then
-#        echo ""
-#else
-#    sed -i 's/unset TZ/echo mcp7940x 0x6f > \/sys\/class\/i2c-adapter\/i2c-1\/new_device/g' /etc/init.d/hwclock.sh
-#fi
+service hwclock.sh stop
 update-rc.d hwclock.sh disable
-update-rc.d hwclock.sh remove
 
-# install modified hwclock-set (check for systemd removed)
-wget -nv $REPORAW/src/hwclock-set -O /lib/udev/hwclock-set
 
 
 echo -e "$INFO INFO: Disabling Bluetooth to use serial port $NC"
@@ -370,11 +356,23 @@ fi
 
 
 
+wget -nv $REPORAW/src/hwclock.hooks -O /etc/initramfs-tools/hooks/hwclock
+wget -nv $REPORAW/src/hwclock.init-bottom -O /etc/initramfs-tools/scripts/init-bottom/hwclock
+
+chmod +x /etc/initramfs-tools/hooks/hwclock
+chmod +x /etc/initramfs-tools/scripts/init-bottom/hwclock
+
+mkinitramfs -o /boot/initramfs.gz
+
+if ! cat /boot/config.txt | grep "initramfs" > /dev/null; then
+	echo -e "$INFO INFO: Installing initramfs $NC"
+	echo "initramfs initramfs.gz followkernel" >>/boot/config.txt
+fi
+
 
 wget -nv $REPORAW/scripts/empc-can-configbaudrate.sh -O /usr/sbin/empc-can-configbaudrate.sh
 chmod +x /usr/sbin/empc-can-configbaudrate.sh
 /usr/sbin/empc-can-configbaudrate.sh
-
 
 
 if [ ! -f "/usr/local/bin/cansend" ]; then

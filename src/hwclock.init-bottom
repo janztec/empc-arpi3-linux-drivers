@@ -1,0 +1,28 @@
+#!/bin/sh
+
+PREREQ=""
+prereqs()
+{
+    echo "$PREREQ"
+}
+
+case $1 in
+    prereqs)
+        prereqs
+        exit 0
+        ;;
+esac
+
+. /scripts/functions
+
+log_begin_msg "RTC: hwclock script start"
+
+/sbin/modprobe i2c-bcm2708
+/sbin/modprobe i2c-dev
+/sbin/modprobe rtc-ds1307 || log_failure_msg "RTC: cannot load module rtc-ds1307!"
+
+/sbin/hwclock --systz || log_failure_msg "RTC: cannot set system time zone!"
+/sbin/hwclock --hctosys || log_failure_msg "RTC: cannot read time from hardware clock!"
+
+log_end_msg
+exit 0
