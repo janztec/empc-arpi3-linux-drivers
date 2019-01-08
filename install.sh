@@ -286,7 +286,16 @@ WELCOME2="These configuration settings will automatically be made:\n
 - Increase USB max. current
 - Enable I2C and SPI drivers
 - Set green LED as SD card activity LED\n"
+
+# emPC-A/RPI3B
 cat /proc/cpuinfo | grep Revision | grep "082" >/dev/null
+if (($? == 0)); then
+        WELCOME2=$WELCOME2"- Disable Bluetooth (enable serial console)\n"
+        WELCOME2=$WELCOME2"- Set CPU frequency to fixed 600MHZ\n"
+fi
+
+# emPC-A/RPI3B+
+cat /proc/cpuinfo | grep Revision | grep "0d3" >/dev/null
 if (($? == 0)); then
         WELCOME2=$WELCOME2"- Disable Bluetooth (enable serial console)\n"
         WELCOME2=$WELCOME2"- Set CPU frequency to fixed 600MHZ\n"
