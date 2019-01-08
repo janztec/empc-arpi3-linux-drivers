@@ -339,6 +339,14 @@ update-rc.d fake-hwclock disable
 service hwclock.sh stop
 update-rc.d hwclock.sh disable
 
+if test -e /lib/systemd/system/hwclock.service; then
+	# if exists from last installation (legacy, no longer used)
+	echo -e "$INFO INFO: deinstalling hwclock.service $NC"
+	systemctl stop hwclock || true
+	systemctl disable hwclock || true
+	systemctl mask hwclock || true
+	rm -f /lib/systemd/system/hwclock.service
+fi
 
 
 echo -e "$INFO INFO: Disabling Bluetooth to use serial port $NC"
