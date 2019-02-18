@@ -6,9 +6,9 @@ This script installs and configures Linux **Socket CAN**, **Serial port RS232/RS
 
 **:heavy_exclamation_mark:  recommended for new designs!**
 
-In newer Raspbian images the Linux kernel is installed in version 4.9 (or later) and therefore our previous script _install.sh_ will no longer work correctly. For this newer Linux kernel versions, our new driver installation script _install-experimental.sh_ is still under development. Your feedback is welcome!
+In newer Raspbian images the Linux kernel is installed in version 4.9 (or later) and therefore our previous script _install.sh_ will no longer work correctly. For this newer Linux kernel versions, our new driver installation script _install.sh_ is still under development. Your feedback is welcome!
 
-_create a backup copy of your �SD card before applying these steps!_
+_create a backup copy of your µSD card before applying these steps!_
 
 **Step 1:**
 
@@ -16,7 +16,7 @@ Install one of the listed RASPBIAN operating system versions from below:
 
 1) **Raspbian Stretch with desktop version 2018-11-13 or later**
 
-   _install-experimental.sh_ script uses the mainline kernel driver sources with only a few source code patches, see _install-experimental.sh_ for more details. Our performance optimizations of the CAN, UART and SPI drivers are currently not included in these mainline drivers.   
+   _install.sh_ script uses the mainline kernel driver sources with only a few source code patches, see _install.sh_ for more details. Our performance optimizations of the CAN, UART and SPI drivers are currently not included in these mainline drivers.   
 
    https://www.raspberrypi.org/downloads/raspbian/
 
@@ -55,7 +55,7 @@ https://www.janztec.com/en/embedded-pc/embedded-computer/empc-arpi3/
   * Realtime clock, battery buffered 
 * Memory 
   * System memory 1 GB 
-  * External accessible µSD card slot  
+  * External accessible ÂµSD card slot  
 * Graphics 
   * HDMI graphic interface  
 * Connectors  
@@ -68,7 +68,7 @@ https://www.janztec.com/en/embedded-pc/embedded-computer/empc-arpi3/
     * 4 x digital inputs (12 - 24VDC) 
     * 4 x digital outputs (12 - 24VDC)  
 * Power Supply  
-  * Input 9 … 32 VDC 
+  * Input 9 â€¦ 32 VDC 
 * DIN rail, wall mounting or desktop 
 
 -------
