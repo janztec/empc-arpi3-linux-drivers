@@ -32,8 +32,10 @@ int main(int argc, char ** argv) {
   }
 
   // enable rs485
+  rs485conf.flags &= ~SER_RS485_RTS_AFTER_SEND;
   rs485conf.flags |= SER_RS485_ENABLED;
-
+  rs485conf.flags |= SER_RS485_RTS_ON_SEND;
+  
   if (ioctl(fd, TIOCSRS485, & rs485conf) < 0) {
     fprintf(stderr, "error sending ioctl port (%d): %s\n", errno, strerror(errno));
   }
