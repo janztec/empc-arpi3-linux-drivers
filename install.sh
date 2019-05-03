@@ -156,9 +156,7 @@ cd /tmp/empc-arpi-linux-drivers
 # compile driver modules
 
 wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/net/can/spi/mcp251x.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O mcp251x.c
-#wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/tty/serial/sc16is7xx.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O sc16is7xx.c
-# use version from Nov 6, 2018
-wget -nv https://raw.githubusercontent.com/raspberrypi/linux/6ed2727ddcbb132ea84146f7cbc604c4090e0f13/drivers/tty/serial/sc16is7xx.c -O sc16is7xx.c
+wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/tty/serial/sc16is7xx.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O sc16is7xx.c
 wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/spi/spi-bcm2835.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O spi-bcm2835.c
 
 
@@ -171,7 +169,6 @@ OPTIMIZATIONS="Optimizations of mainline drivers are available:\n
  - use low level interrupts
 - Serial RS232/RS485 (sc16is7xx.c)
  - added delay in startup to prevent message: unexpected interrupt: 8
- - use low level interrupts
 \nDo you want these optimizations?"
 
 if (whiptail --title "emPC-A/RPI3 Installation Script" --yesno "$OPTIMIZATIONS" 24 60) then
@@ -194,11 +191,11 @@ if (whiptail --title "emPC-A/RPI3 Installation Script" --yesno "$OPTIMIZATIONS" 
  
 # SERIAL driver
  
- echo -e "$INFO INFO: patching sc16is7xx.c to IRQF_TRIGGER_LOW $NC" 1>&2
- insert2file sc16is7xx.c "static int sc16is7xx_probe" "_irq" "\tflags = IRQF_TRIGGER_LOW;"
- insert2file sc16is7xx.c "}" "static void sc16is7xx_ist" "static int s_irq=0;"
- insert2file sc16is7xx.c "static irqreturn_t sc16is7xx_irq" "kthread_queue_work" "\tdisable_irq_nosync(s_irq=irq);"
- insert2file sc16is7xx.c "static void sc16is7xx_ist" "}" "\tif(s_irq!=0) enable_irq(s_irq);"
+ #echo -e "$INFO INFO: patching sc16is7xx.c to IRQF_TRIGGER_LOW $NC" 1>&2
+ #insert2file sc16is7xx.c "static int sc16is7xx_probe" "_irq" "\tflags = IRQF_TRIGGER_LOW;"
+ #insert2file sc16is7xx.c "}" "static void sc16is7xx_ist" "static int s_irq=0;"
+ #insert2file sc16is7xx.c "static irqreturn_t sc16is7xx_irq" "kthread_queue_work" "\tdisable_irq_nosync(s_irq=irq);"
+ #insert2file sc16is7xx.c "static void sc16is7xx_ist" "}" "\tif(s_irq!=0) enable_irq(s_irq);"
  
 # fixed error message "unexpected interrupt: 8" in dmesg by added mdelay(1)
 # without delay, after enabling the interrupts in IER, set_baud/set_termios is immediatly called, 
