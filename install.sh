@@ -156,7 +156,7 @@ cd /tmp/empc-arpi-linux-drivers
 # compile driver modules
 
 wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/net/can/spi/mcp251x.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O mcp251x.c
-wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/tty/serial/sc16is7xx.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O sc16is7xx.c
+wget -nv https://raw.githubusercontent.com/janztec/empc-arpi3-linux-drivers/master/src/sc16is7xx.c -O sc16is7xx.c
 wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/spi/spi-bcm2835.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O spi-bcm2835.c
 
 
@@ -166,9 +166,6 @@ OPTIMIZATIONS="Optimizations of mainline drivers are available:\n
  - enable real time priority for work queue\n
 - SocketCan driver (mcp251x.c)
  - higher ost delay timeout to prevent can detection problems after soft-reboots\n
- - use low level interrupts
-- Serial RS232/RS485 (sc16is7xx.c)
- - added delay in startup to prevent message: unexpected interrupt: 8
  - use low level interrupts
 \nDo you want these optimizations?"
 
@@ -190,25 +187,7 @@ if (whiptail --title "emPC-A/RPI3 Installation Script" --yesno "$OPTIMIZATIONS" 
  insert2file spi-bcm2835.c "static int bcm2835_spi_probe" "master->" "\tmaster->rt = 1;"
  
  
-# SERIAL driver
- 
- echo -e "$INFO INFO: patching sc16is7xx.c to IRQF_TRIGGER_LOW $NC" 1>&2
- insert2file sc16is7xx.c "static int sc16is7xx_probe" "_irq" "\tflags = IRQF_TRIGGER_LOW;"
- insert2file sc16is7xx.c "}" "static void sc16is7xx_ist" "static int s_irq=0;"
- insert2file sc16is7xx.c "static irqreturn_t sc16is7xx_irq" "kthread_queue_work" "\tdisable_irq_nosync(s_irq=irq);"
- insert2file sc16is7xx.c "static void sc16is7xx_ist" "}" "\tif(s_irq!=0) enable_irq(s_irq);"
- 
-# fixed error message "unexpected interrupt: 8" in dmesg by added mdelay(1)
-# without delay, after enabling the interrupts in IER, set_baud/set_termios is immediatly called, 
-# enables enhanced register ("config mode") with LCR = 0xBF and the first interrupt occurs at
-# the same time, resulting in reading the IIR interrupt status register in the wrong mode.  
-# This problematic time window, from enabling the interrupts to handling them, is about 100µs, so a
-# delay of 1000µs=1ms was choosen 
- insert2file sc16is7xx.c "static int sc16is7xx_startup" "return 0" "\tmdelay(1);"
 
- # enable read of CTR bit in modem status register /*MSR[4] CTS*/
- echo -e "$INFO INFO: sc16is7xx.c to support CTS modem status bit $NC" 1>&2
- insert2file sc16is7xx.c "static unsigned int sc16is7xx_get_mctrl" "return TIOCM_DSR | TIOCM_CAR" "\tif (sc16is7xx_port_read(port, SC16IS7XX_MSR_REG ) & 0x10) return TIOCM_DSR | TIOCM_CAR | TIOCM_CTS;"
 
  # CAN driver
  echo -e "$INFO INFO: patching mcp251x.c to IRQF_TRIGGER_LOW | IRQF_ONESHOT $NC" 1>&2
