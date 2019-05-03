@@ -156,8 +156,11 @@ cd /tmp/empc-arpi-linux-drivers
 # compile driver modules
 
 wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/net/can/spi/mcp251x.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O mcp251x.c
-wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/tty/serial/sc16is7xx.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O sc16is7xx.c
+#wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/tty/serial/sc16is7xx.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O sc16is7xx.c
+# use version from Feb 21, 2018
+wget -nv https://raw.githubusercontent.com/raspberrypi/linux/dbca2148f4c21454da461f1208b05d3a5887d133/drivers/tty/serial/sc16is7xx.c -O sc16is7xx.c
 wget -nv https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/plain/drivers/spi/spi-bcm2835.c?h=v$VERSION.$PATCHLEVEL.$SUBLEVEL -O spi-bcm2835.c
+
 
 OPTIMIZATIONS="Optimizations of mainline drivers are available:\n
 - SPI driver (spi-bcm2835.c)
