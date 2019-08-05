@@ -19,6 +19,9 @@
 #overscan_top=16
 #overscan_bottom=16
 
+# disable overscan borders
+disable_overscan=1
+
 # uncomment to force a console size. By default it will be display's size minus
 # overscan.
 #framebuffer_width=1280
