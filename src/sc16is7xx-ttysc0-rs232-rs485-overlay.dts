@@ -70,7 +70,7 @@
 	};
 	
 
-    __overrides__ {
-      interrupt = <&sc16is740>,"interrupts:0";
-    };
+//    __overrides__ {
+//      int_pin = <&sc16is740>,"interrupts:0";
+//    };
 };
