@@ -238,6 +238,7 @@ fi
 
 /bin/cp -rf mcp2515-can0.dtbo /boot/overlays/mcp2515-can0.dtbo
 /bin/cp -rf sc16is7xx-ttysc0-rs232-rs485.dtbo /boot/overlays/sc16is7xx-ttysc0-rs232-rs485.dtbo
+/bin/cp -rf mcp7940x-i2c-rtc.dtbo /boot/overlays/mcp7940x-i2c-rtc.dtbo
 
 # register new driver modules
 depmod -a
