@@ -23,7 +23,7 @@
 
 	fragment@1 {
 		target = <&spi0>;
-		frag1: __overlay__ {
+		__overlay__ {
 			#address-cells = <1>;
 			#size-cells = <0>;
 			
@@ -70,7 +70,7 @@
 	};
 	
 
-//    __overrides__ {
-//      int_pin = <&sc16is740>,"interrupts:0";
-//    };
+    __overrides__ {
+      int_pin = <&sc16is740>,"interrupts:0";
+    };
 };
