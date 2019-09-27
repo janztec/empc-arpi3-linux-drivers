@@ -63,7 +63,7 @@
         	target = <&spi0>;
         	__overlay__ {
             		status = "okay";
-            		spidev@1{
+            		spidev@0{
                 		status = "disabled";
             		};
         	};
