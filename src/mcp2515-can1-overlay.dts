@@ -53,7 +53,7 @@
             /* needed to avoid dtc warning */
             #address-cells = <1>;
             #size-cells = <0>;
-            can1: mcp2515@0 {
+            can1: mcp2515@1 {
                 reg = <1>; /* CE1 */
                 compatible = "microchip,mcp2515";
                 pinctrl-names = "default";
