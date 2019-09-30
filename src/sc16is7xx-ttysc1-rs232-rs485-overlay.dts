@@ -43,7 +43,7 @@
 				spi-max-frequency = <4000000>;
 				status = "okay";
 
-				sc16is740_1_clk: sc16is740_clk {
+				sc16is740_1_clk: sc16is740_1_clk {
 					compatible = "fixed-clock";
 					#clock-cells = <0>;
 					clock-frequency = <1843200>;
