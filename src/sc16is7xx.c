@@ -329,11 +329,15 @@ struct sc16is7xx_port {
 #ifdef CONFIG_GPIOLIB
         struct gpio_chip                gpio;
 #endif
+
+        int irq;                        // used as temporary variable in isr and irq handler
+        
         unsigned char                   buf[SC16IS7XX_FIFO_SIZE];
         struct kthread_worker           kworker;
         struct task_struct              *kworker_task;
         struct kthread_work             irq_work;
         struct sc16is7xx_one            p[0];
+                
 };
 
 static unsigned long sc16is7xx_lines;
@@ -697,7 +701,6 @@ static bool sc16is7xx_port_irq(struct sc16is7xx_port *s, int portno)
         return true;
 }
 
-static int s_irq=0;
 static void sc16is7xx_ist(struct kthread_work *ws)
 {
         struct sc16is7xx_port *s = to_sc16is7xx_port(ws, irq_work);
@@ -709,16 +712,16 @@ static void sc16is7xx_ist(struct kthread_work *ws)
                 for (i = 0; i < s->devtype->nr_uart; ++i)
                         keep_polling |= sc16is7xx_port_irq(s, i);
                 if (!keep_polling)
-                        break;       
+                        break;
         }
-        if(s_irq!=0) enable_irq(s_irq);
+        if(s->irq!=0) enable_irq(s->irq);
 }
 
 static irqreturn_t sc16is7xx_irq(int irq, void *dev_id)
 {
         struct sc16is7xx_port *s = (struct sc16is7xx_port *)dev_id;
 
-        disable_irq_nosync(s_irq=irq);
+        disable_irq_nosync(s->irq=irq);
         kthread_queue_work(&s->kworker, &s->irq_work);
 
         return IRQ_HANDLED;
@@ -1178,6 +1181,8 @@ static int sc16is7xx_probe(struct device *dev,
                 return -ENOMEM;
         }
 
+        s->irq = 0; // 0= no irq yet assigned, see irq handler
+
         s->clk = devm_clk_get(dev, NULL);
         if (IS_ERR(s->clk)) {
                 if (pfreq)
@@ -1519,4 +1524,4 @@ module_exit(sc16is7xx_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jon Ringle <jringle@gridpoint.com>");
-MODULE_DESCRIPTION("optimized for emPC-A/RPI3: SC16IS7XX serial driver");
+MODULE_DESCRIPTION("optimized for emPC-A/RPI3: optimized for emPC-A/RPI3: SC16IS7XX serial driver");
