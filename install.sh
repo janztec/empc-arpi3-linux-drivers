@@ -53,6 +53,11 @@ if [ $EUID -ne 0 ]; then
     exit 1
 fi
 
+if test -e /opt/janztec/empc-arpi3-linux-drivers/installdrivers.sh; then
+    echo -e "$ERR ERROR: This script is not supported on images with pre-installed driver installation script. Use script /opt/janztec/empc-arpi3-linux-drivers/installdrivers.sh , or contact Janz Tec support for new image download. $NC" 1>&2
+    exit 1
+fi
+
 wget -q --spider https://www.github.com
 if [ $? -ne 0 ]; then
         echo -e "$ERR ERROR: Internet connection required! $NC" 1>&2
