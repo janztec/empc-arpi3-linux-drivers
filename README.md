@@ -21,7 +21,7 @@ Install one of the listed RASPBIAN operating system versions from below:
    https://www.raspberrypi.org/downloads/raspbian/
 
 
-**Step 2:**
+**Step 2a:**
 
 
 ```
@@ -37,7 +37,29 @@ bash install.sh
 <br />
 
 
+**Step 2b (Alternative if step 2a fails):**
 
+Depending on the installed Linux kernel version it might be possible, that no matching kernel headers are available in the official Rasbian repository and step 2a fails. In this case it is possible to install the specific kernel version 20190819-1_armhf with matching kernel headers manually:
+
+```
+cd /tmp
+sudo bash
+wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel_1.20190819-1_armhf.deb
+dpkg -i raspberrypi-kernel_1.20190819-1_armhf.deb
+wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel-headers_1.20190819-1_armhf.deb
+dpkg -i raspberrypi-kernel-headers_1.20190819-1_armhf.deb
+
+reboot
+
+sudo bash
+cd /tmp
+wget https://raw.githubusercontent.com/janztec/empc-arpi3-linux-drivers/master/install-withoutkernelheaderupdate.sh -O install-withoutkernelheaderupdate.sh
+bash install-withoutkernelheaderupdate.sh
+```
+
+<br />
+<br />
+<br />
 
 ## Product pages
 https://www.janztec.com/en/embedded-pc/embedded-computer/empc-arpi3/
