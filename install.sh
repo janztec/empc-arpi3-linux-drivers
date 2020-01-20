@@ -88,7 +88,7 @@ if [ $YEAR -le 2016 ] ; then
         echo -e "$ERR ERROR: invalid date. set current date and time! $NC" 1>&2
         exit 1
 fi
-if [ $YEAR -ge 2020 ] ; then
+if [ $YEAR -ge 2021 ] ; then
         echo -e "$ERR ERROR: invalid date. set current date and time! $NC" 1>&2
         exit 1
 fi
