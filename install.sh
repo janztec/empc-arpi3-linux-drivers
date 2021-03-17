@@ -84,11 +84,11 @@ if [ $KERNELVER -le 408 ]; then
 fi
 
 YEAR=$[`date +'%Y'`]
-if [ $YEAR -le 2016 ] ; then
+if [ $YEAR -le 2020 ] ; then
         echo -e "$ERR ERROR: invalid date. set current date and time! $NC" 1>&2
         exit 1
 fi
-if [ $YEAR -ge 2021 ] ; then
+if [ $YEAR -ge 2022 ] ; then
         echo -e "$ERR ERROR: invalid date. set current date and time! $NC" 1>&2
         exit 1
 fi
