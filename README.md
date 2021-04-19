@@ -44,10 +44,10 @@ Depending on the installed Linux kernel version it might be possible, that no ma
 ```
 cd /tmp
 sudo bash
-wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel_1.20190819-1_armhf.deb
-dpkg -i raspberrypi-kernel_1.20190819-1_armhf.deb
-wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel-headers_1.20190819-1_armhf.deb
-dpkg -i raspberrypi-kernel-headers_1.20190819-1_armhf.deb
+wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel_1.20200601-1_armhf.deb
+dpkg -i raspberrypi-kernel_1.20200601-1_armhf.deb
+wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel-headers_1.20200601-1_armhf.deb
+dpkg -i raspberrypi-kernel-headers_1.20200601-1_armhf.deb
 
 reboot
 
