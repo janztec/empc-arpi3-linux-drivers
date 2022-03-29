@@ -4,21 +4,15 @@ This script installs and configures Linux **Socket CAN**, **Serial port RS232/RS
 
 ## :large_orange_diamond: Installation Instructions
 
-**:heavy_exclamation_mark:  recommended for new designs!**
-
-In newer Raspbian images the Linux kernel is installed in version 4.9 (or later) and therefore our previous script _install.sh_ will no longer work correctly. For this newer Linux kernel versions, our new driver installation script _install.sh_ is still under development. Your feedback is welcome!
-
 _create a backup copy of your µSD card before applying these steps!_
 
 **Step 1:**
 
-Install one of the listed RASPBIAN operating system versions from below: 
+Install the Raspberry Pi OS 32-bit:  
+https://www.raspberrypi.com/software/
 
-1) **Raspbian Stretch with desktop version 2018-11-13 or later**
-
-   _install.sh_ script uses the mainline kernel driver sources with only a few source code patches, see _install.sh_ for more details. Our performance optimizations of the CAN, UART and SPI drivers are currently not included in these mainline drivers.   
-
-   https://www.raspberrypi.org/downloads/raspbian/
+_The install script was tested with Kernel version 5.10, 5.4 and 4.19._
+_Older or later versions may not work_
 
 
 **Step 2a:**
@@ -39,34 +33,35 @@ bash install.sh
 
 **Step 2b (Alternative if step 2a fails):**
 
-Depending on the installed Linux kernel version it might be possible, that no matching kernel headers are available in the official Rasbian repository and step 2a fails. In this case it is possible to install the specific kernel version 20190819-1_armhf with matching kernel headers manually:
+Depending on the installed Linux kernel version it might be possible, that no matching kernel headers are available in the official Rasbian repository and step 2a fails. In this case it is possible to install the specific kernel version 20220308-2_armhf with matching kernel headers manually.
+Select "No" in the "Do you want to install the latest kernel headers" prompt!
 
 ```
 cd /tmp
 sudo bash
-wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel_1.20200601-1_armhf.deb
-dpkg -i raspberrypi-kernel_1.20200601-1_armhf.deb
-wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel-headers_1.20200601-1_armhf.deb
-dpkg -i raspberrypi-kernel-headers_1.20200601-1_armhf.deb
+wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel_1.20220308-2_armhf.deb
+dpkg -i raspberrypi-kernel_1.20220308-2_armhf.deb
+wget https://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel-headers_1.20220308-2_armhf.deb
+dpkg -i raspberrypi-kernel-headers_1.20220308-2_armhf.deb
 
 reboot
 
 sudo bash
 cd /tmp
-wget https://raw.githubusercontent.com/janztec/empc-arpi3-linux-drivers/master/install-withoutkernelheaderupdate.sh -O install-withoutkernelheaderupdate.sh
-bash install-withoutkernelheaderupdate.sh
+wget https://raw.githubusercontent.com/janztec/empc-arpi3-linux-drivers/master/install.sh -O install.sh
+bash install.sh
 ```
 
 <br />
 <br />
 <br />
 
-## Product pages
-https://www.janztec.com/en/embedded-pc/embedded-computer/empc-arpi3/
+## Product page
+https://www.janztec.com/industrie-pcs
 
 **emPC-A/RPI3**
 
-![emPC-A/RPI3](https://www.janztec.com/fileadmin/user_upload/Produkte/embedded/emPC-A-RPI2/janztec_produkte_embedded_emPC_RPI_raspberry_front.jpg)
+![emPC-A/RPI3](https://www.janztec.com/wp-content/uploads/2020/03/emPC_A_RPI_front.png.webp)
 
 **FEATURES emPC-A/RPI3**
 * Processor 
@@ -97,9 +92,9 @@ https://www.janztec.com/en/embedded-pc/embedded-computer/empc-arpi3/
 
 **emVIEW-7/RPI3**
 
-https://www.janztec.com/en/embedded-pc/panel-pc/emview-7rpi3/
+https://www.janztec.com/panel-pcs
 
-![emVIEW-7/RPI3](https://www.janztec.com/fileadmin/user_upload/Produkte/embedded/emVIEW-7-RPI3/janz_tec_produkte_embedded_emVIEW-7_RPI3_front_schraeg_800x8001.jpg)
+![emVIEW-7/RPI3](https://www.janztec.com/wp-content/uploads/2020/03/janz_tec_produkte_embedded_emVIEW-7_RPI3_front-1.png.webp)
 
 **FEATURES emVIEW-7/RPI3**
 * LCD Display
