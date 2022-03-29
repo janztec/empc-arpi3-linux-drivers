@@ -1,10 +1,10 @@
 # emPC-A/RPI3, emPC-A/RPI3+, emVIEW-7/RPI3 & emVIEW-7/RPI3+ by Janz Tec AG 
 
-This script installs and configures Linux **Socket CAN**, **Serial port RS232/RS485** and **RTC** drivers
+This script installs and configures Linux **Socket CAN**, **Serial port RS232/RS485** and **RTC** drivers.
 
 ## :large_orange_diamond: Installation Instructions
 
-_create a backup copy of your µSD card before applying these steps!_
+_Create a backup copy of your µSD card before applying these steps!_
 
 **Step 1:**
 
@@ -12,7 +12,7 @@ Install the Raspberry Pi OS 32-bit:
 https://www.raspberrypi.com/software/
 
 _The install script was tested with Kernel version 5.10, 5.4 and 4.19._
-_Older or later versions may not work_
+_Older or later versions may not work!_
 
 
 **Step 2a:**
