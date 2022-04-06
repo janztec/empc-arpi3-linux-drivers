@@ -87,10 +87,10 @@ max_usb_current=1
 arm_freq=600
 
 # green LED (gpio5) as SD card activity
-dtoverlay=pi3-act-led,gpio=5,activelow=off
+dtoverlay=act-led,gpio=5,activelow=off
 
 # disables Bluetooth and restores UART0/ttyAMA0
-dtoverlay=pi3-miniuart-bt
+dtoverlay=miniuart-bt
 
 # enable more than 600mA for USB ports
 max_usb_current=1
@@ -100,10 +100,10 @@ max_usb_current=1
 arm_freq=600
 
 # green LED (gpio5) as SD card activity
-dtoverlay=pi3-act-led,gpio=5,activelow=off
+dtoverlay=act-led,gpio=5,activelow=off
 
 # disables Bluetooth and restores UART0/ttyAMA0
-dtoverlay=pi3-miniuart-bt
+dtoverlay=miniuart-bt
 
 # disable more than 600mA for USB ports
 max_usb_current=0
