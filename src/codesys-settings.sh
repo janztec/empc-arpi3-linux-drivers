@@ -46,8 +46,5 @@ sed -i 's/pre-up \/sbin\/ip link set can0/#pre-up \/sbin\/ip link set can0/g' /e
 sed -i 's/up \/sbin\/ifconfig can0/#up \/sbin\/ifconfig can0/g' /etc/network/interfaces
 sed -i 's/down \/sbin\/ifconfig can0/#down \/sbin\/ifconfig can0/g' /etc/network/interfaces
 
-echo "INFO: using single core version"
-sed -i 's/armv7l/armv6l/' /etc/CODESYSControl_User.cfg || true
-
 systemctl disable can0.service
 systemctl mask can0.service
