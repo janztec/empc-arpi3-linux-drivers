@@ -11,7 +11,7 @@ _Create a backup copy of your µSD card before applying these steps!_
 Install the Raspberry Pi OS 32-bit:  
 https://www.raspberrypi.com/software/
 
-_The install script was tested with Kernel version 5.10, 5.4 and 4.19._
+_The install script was tested with Kernel version 5.15, 5.10, 5.4 and 4.19._
 _Older or later versions may not work!_
 
 
