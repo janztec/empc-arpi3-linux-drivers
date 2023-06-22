@@ -253,10 +253,10 @@ if (whiptail --title "emPC-A/RPI3 Installation Script" --yesno "$OPTIMIZATIONS" 
                 echo -e "$INFO INFO: patching sc16is7xx.c for kernel version 6.1+"
                 patchfile sc16is7xx.c "sched_setscheduler(s->kworker_task, SCHED_FIFO, &sched_param);" "sched_set_fifo(s->kworker_task);"
                 patchfile sc16is7xx.c "struct ktermios \*old)" "const struct ktermios \*old)"
-                patchfile sc16is7xx.c "static int sc16is7xx_config_rs485(struct uart_port \*port," "static int sc16is7xx_config_rs485(struct uart_port \*>"
-                patchfile sc16is7xx.c "static int sc16is7xx_spi_remove(struct spi_device \*spi)" "static void sc16is7xx_spi_remove(struct spi_device \*sp>"
+                patchfile sc16is7xx.c "static int sc16is7xx_config_rs485(struct uart_port \*port," "static int sc16is7xx_config_rs485(struct uart_port \*port, struct ktermios \*termios,"
+                patchfile sc16is7xx.c "static int sc16is7xx_spi_remove(struct spi_device \*spi)" "static void sc16is7xx_spi_remove(struct spi_device \*spi)"
                 patchfile sc16is7xx.c "return sc16is7xx_remove(\&spi->dev)\;" "sc16is7xx_remove(\&spi->dev)\;"
-                patchfile sc16is7xx.c "static int sc16is7xx_i2c_remove(struct i2c_client \*client)" "static void sc16is7xx_i2c_remove(struct i2c_client \>"
+                patchfile sc16is7xx.c "static int sc16is7xx_i2c_remove(struct i2c_client \*client)" "static void sc16is7xx_i2c_remove(struct i2c_client \*client)"
                 patchfile sc16is7xx.c "return sc16is7xx_remove(\&client->dev)\;" "sc16is7xx_remove(\&client->dev)\;"
         fi
 fi
